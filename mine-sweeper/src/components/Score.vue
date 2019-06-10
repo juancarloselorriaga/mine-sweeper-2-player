@@ -56,6 +56,14 @@ export default {
       if(this.lastCellClicks <= 1){
         this.players[0].isActive = this.next;
         this.players[1].isActive = !this.next;
+
+        if(this.players[0].isActive && !this.players[1].isActive){
+          this.$emit('playerTurn', 'player1');
+        }
+        else if(this.players[1].isActive && !this.players[0].isActive){
+          this.$emit('playerTurn', 'player2');
+        }
+        
       }
       
     },

@@ -1,4 +1,6 @@
 <template>
+
+  <div>
   <section id="game" class="game">
     <div class="game__menu">
       <div class="game__menu-wrapper">
@@ -7,27 +9,36 @@
       </div>
     </div>
     <div class="game__wrapper" id="mine-sweeper">
-      <Score :found-mines="this.foundMines" :next="this.nextPlayerTrigger"></Score>
+      <Score :found-mines="this.foundMines" :next="this.nextPlayerTrigger" @playerTurn="modalTrigger"></Score>
 
       <Board @next="togglePlayer" @found="countMines" :found-mines="this.foundMines"></Board>
     </div>
   </section>
+  <Next-player-modal v-if="showModal" :activePlayer="this.activePlayer" @close="showModal = false"></Next-player-modal>
+  </div>
+
+
 </template>
 
 <script>
 import Board from "@/components/Board.vue";
 import Score from "@/components/Score.vue";
+import NextPlayerModal from "@/components/NextPlayerModal.vue";
+import { mapState, mapMutations } from "vuex";
 
 export default {
   name: "Game",
   components: {
     Board,
-    Score
+    Score,
+    NextPlayerModal
   },
   data() {
     return {
       foundMines: 0,
-      nextPlayerTrigger: false
+      nextPlayerTrigger: false,
+      activePlayer: '',
+      showModal: false
     };
   },
   methods: {
@@ -39,7 +50,20 @@ export default {
     togglePlayer() {
       this.nextPlayerTrigger = !this.nextPlayerTrigger;
       return this.nextPlayerTrigger;
+    },
+    modalTrigger(player) {
+      this.showModal = true;
+
+      if(player === 'player1'){
+        this.activePlayer = this.p1;
+      }
+      else if(player === 'player2'){
+        this.activePlayer = this.p2;
+      }
     }
+  },
+  computed: {
+    ...mapState(["p1", "p2"])
   }
 };
 </script>
