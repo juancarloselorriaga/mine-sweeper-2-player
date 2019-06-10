@@ -1,11 +1,17 @@
 <template>
   <div id="app">
     <div id="nav">
-      <div class="nav__item-wrapper">
-        <router-link to="/">Play</router-link>|
-        <router-link to="/help">Help</router-link>|
-        <router-link to="/about">About</router-link>
+      <div class="game__menu">
+      <div class="head__logo">
+        <img class="head__logo-img" src="@/assets/Logo2.svg" alt="mine-sweeper-logo">
       </div>
+      </div>
+      <div class="nav__item-wrapper">
+        <router-link class="link" to="/">Play</router-link>|
+        <router-link class="link" to="/help">Help</router-link>|
+        <router-link class="link" to="/about">About</router-link>
+      </div>
+      <hr>
     </div>
     <router-view/>
   </div>
@@ -25,7 +31,6 @@ html {
 }
 
 #app {
-  padding: 1rem;
   text-align: center;
   color: #f76c6c;
   box-sizing: border-box;
@@ -37,22 +42,40 @@ html {
 }
 #nav {
   padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.3);
 }
 
-#nav a {
+.link{
   font-weight: bold;
   color: #24305e;
   text-decoration: none;
-  margin: 12rem;
+  margin: 4rem;
   font-size: 1.9rem;
 }
 
-#nav a.router-link-exact-active {
+.link.router-link-exact-active{
   color: #f76c6c;
   text-decoration: underline;
 }
 
 .nav__item-wrapper {
-  margin-bottom: 2rem;
+  display:inline-block;
+}
+
+.game__menu {
+  display: inline-block;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.head__logo {
+  width: 25rem;
+}
+
+.head__logo-img {
+  width: 100%;
 }
 </style>

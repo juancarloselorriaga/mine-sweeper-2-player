@@ -1,9 +1,6 @@
 <template>
   <section id="game" class="game">
     <div class="game__menu">
-      <div class="head__logo">
-        <img class="head__logo-img" src="@/assets/Logo2.svg" alt="mine-sweeper-logo">
-      </div>
       <div class="game__menu-wrapper">
         <label class="game__menu-item">Restart</label>
         <label class="game__menu-item">Quit</label>
@@ -58,7 +55,7 @@ export default {
 
 .game__menu {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding: 1rem;
   min-width: 92.4rem;

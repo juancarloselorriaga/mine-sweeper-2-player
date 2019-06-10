@@ -5,10 +5,20 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-
+    p1: '',
+    p2: '',
+    gameStatus: false
   },
   mutations: {
-
+    assignPlayer1 (state, player1) {
+      return state.p1 = player1;
+    },
+    assignPlayer2 (state, player2) {
+      return state.p2 = player2;
+    },
+    startGame(state){
+      return state.gameStatus = true
+    }
   },
   actions: {
 

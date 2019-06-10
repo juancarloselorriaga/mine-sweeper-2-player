@@ -18,6 +18,7 @@
 <script>
 import TotalCount from "@/components/TotalCount.vue";
 import Player from "@/components/Player.vue";
+import {mapState, mapMutations} from 'vuex'
 
 export default {
   name: "Score",
@@ -35,13 +36,13 @@ export default {
       pendingMines: 50, //Arreglar hardcodeo con props
       players: [
         {
-          name: "Juan Carlos", //HARDCODED
+          name: '',
           isActive: false,
           background: "firstPlayer",
           mineCount: 0
         },
         {
-          name: "Jugador 2", //HARDCODED
+          name: '',
           isActive: true,
           background: "secondPlayer",
           mineCount: 0
@@ -50,6 +51,7 @@ export default {
     };
   },
   computed: {
+    ...mapState(['p1', 'p2']),
     playerToggle() {
       this.players[0].isActive = this.next;
       this.players[1].isActive = !this.next;
@@ -70,6 +72,10 @@ export default {
         return "draw";
       }
     }
+  },
+  mounted() {
+    this.players[0].name = this.p1;
+    this.players[1].name = this.p2;
   }
 };
 </script>
