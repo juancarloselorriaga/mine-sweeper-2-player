@@ -1,13 +1,13 @@
 <template>
   <div class="container">
     <div class="wrapper">
-      <span class="label">Player's 1 name</span>
+      <span class="label">Player 1</span>
       <span v-if="p1 !== ''" class="label label--red">{{p1}}</span>
       <input v-if="p1 == ''" type="text" class="input" @keyup.enter="addPlayer1" v-model="player1" autofocus>
       <span v-if="p1 == ''" class="instructions-lbl">Hit enter to assign player</span>
     </div>
     <div class="wrapper">
-      <span class="label">Player's 2 name</span>
+      <span class="label">Player 2</span>
       <span v-if="p2 !== ''" class="label label--red">{{p2}}</span>
       <input v-if="p2 == ''" type="text" class="input" @keyup.enter="addPlayer2" v-model="player2">
       <span v-if="p2 == ''" class="instructions-lbl">Hit enter to assign player</span>

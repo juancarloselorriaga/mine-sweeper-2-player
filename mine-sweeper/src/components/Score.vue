@@ -32,18 +32,18 @@ export default {
   },
   data() {
     return {
-      totalMines: 50, //Arreglar hardcodeo con props
-      pendingMines: 50, //Arreglar hardcodeo con props
+      totalMines: 50,
+      pendingMines: 50,
       players: [
         {
           name: '',
-          isActive: false,
+          isActive: true,
           background: "firstPlayer",
           mineCount: 0
         },
         {
           name: '',
-          isActive: true,
+          isActive: false,
           background: "secondPlayer",
           mineCount: 0
         }
@@ -51,14 +51,13 @@ export default {
     };
   },
   computed: {
-    ...mapState(['p1', 'p2']),
+    ...mapState(['p1', 'p2', 'lastCellClicks']),
     playerToggle() {
-      this.players[0].isActive = this.next;
-      this.players[1].isActive = !this.next;
-
-      if (this.players[1].isActive) {
-        this.$emit("playerTwoActive"); //REVISAR SI ME QUEDO CON ESTO
+      if(this.lastCellClicks <= 1){
+        this.players[0].isActive = this.next;
+        this.players[1].isActive = !this.next;
       }
+      
     },
     checkPendingMines() {
       return this.pendingMines - this.foundMines;

@@ -7,7 +7,8 @@ export default new Vuex.Store({
   state: {
     p1: '',
     p2: '',
-    gameStatus: false
+    gameStatus: false,
+    lastCellClicks: 0
   },
   mutations: {
     assignPlayer1 (state, player1) {
@@ -18,6 +19,9 @@ export default new Vuex.Store({
     },
     startGame(state){
       return state.gameStatus = true
+    },
+    checkClicks(state, clicksReceived){
+      return state.lastCellClicks = clicksReceived
     }
   },
   actions: {

@@ -17,6 +17,7 @@
 
 <script>
 import Cell from "@/components/Cell.vue";
+import { mapState, mapMutations } from "vuex";
 
 export default {
   name: "Board",
@@ -39,6 +40,7 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(['checkClicks']),
     initBoard() {
       for (let i = 0; i <= this.cellNum; i++) {
         this.calcX++;
@@ -239,7 +241,12 @@ export default {
       if (this.cells[index].isMined) {
         this.$emit("found", this.cells[index].clicks);
       }
+
+      this.checkClicks(this.cells[index].clicks);
     }
+  },
+   computed: {
+    ...mapState(['lastCellClicks'])
   },
   beforeMount() {
     this.initBoard();
@@ -262,7 +269,6 @@ export default {
   position: relative;
   width: 100%;
   display: none;
-  /* background: url("../assets/red-mine.svg") center no-repeat; */
   overflow: hidden;
 }
 </style>
