@@ -26,6 +26,7 @@
 
       <transition name="fade" mode="out-in">
         <input
+          ref="player2"
           v-if="p2 == ''"
           type="text"
           class="input"
@@ -69,6 +70,7 @@ export default {
       if (this.player1) {
         this.assignPlayer1(this.player1);
         this.player1 = "";
+        this.$refs.player2.focus();
       }
     },
     addPlayer2() {

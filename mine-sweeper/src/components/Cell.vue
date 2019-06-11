@@ -18,6 +18,10 @@
 </template>
 
 <script>
+
+import { mapState, mapMutations } from "vuex";
+
+
 export default {
   name: "Cell",
   props: {
@@ -26,7 +30,8 @@ export default {
     index: Number,
     surroundingMines: Number,
     selectedCell: String,
-    clicks: Number
+    clicks: Number,
+    mineImg: String
   },
   computed: {
     cellObj() {
@@ -44,6 +49,7 @@ export default {
         "color--four": this.surroundingMines === 4,
         "color--five": this.surroundingMines === 5
       };
+    
     }
   },
   methods: {

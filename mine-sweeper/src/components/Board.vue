@@ -11,6 +11,7 @@
       :class="{ mined : !selectCell }"
       :mined="cell.isMined"
       :surrounding-mines="cell.surroundingMines"
+      :mineImg="player1Obj"
     ></Cell>
   </div>
 </template>
@@ -275,7 +276,7 @@ export default {
     }
   },
    computed: {
-    ...mapState(['lastCellClicks'])
+    ...mapState(['lastCellClicks', 'player1Obj', 'player2Obj'])
   },
   beforeMount() {
     this.initBoard();

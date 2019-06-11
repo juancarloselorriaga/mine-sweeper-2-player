@@ -48,6 +48,7 @@ export default {
       }
     },
     togglePlayer() {
+      console.log('next')
       this.nextPlayerTrigger = !this.nextPlayerTrigger;
       return this.nextPlayerTrigger;
     },

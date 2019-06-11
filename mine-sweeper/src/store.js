@@ -8,7 +8,9 @@ export default new Vuex.Store({
     p1: '',
     p2: '',
     gameStatus: false,
-    lastCellClicks: 0
+    lastCellClicks: 0,
+    player1Obj: "@/assets/red-mine.svg",
+    player2Obj: '@/assets/blue-mine.svg'
   },
   mutations: {
     assignPlayer1 (state, player1) {
