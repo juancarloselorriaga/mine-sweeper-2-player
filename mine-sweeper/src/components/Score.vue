@@ -39,13 +39,15 @@ export default {
           name: '',
           isActive: true,
           background: "firstPlayer",
-          mineCount: 0
+          mineCount: 0,
+          mineColor: ''
         },
         {
           name: '',
           isActive: false,
           background: "secondPlayer",
-          mineCount: 0
+          mineCount: 0,
+          mineColor: ''
         }
       ]
     };

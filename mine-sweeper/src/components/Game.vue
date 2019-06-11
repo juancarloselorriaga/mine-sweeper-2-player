@@ -43,6 +43,7 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(['whoIsPlaying']),
     countMines(clicks) {
       if (clicks === 1) {
         this.foundMines++;
@@ -58,11 +59,13 @@ export default {
 
       if(player === 'player1'){
         this.activePlayer = this.p1;
-        this.activePlayerTag = 'player1'
+        this.whoIsPlaying('player1')
+        // Envía el jugador activo a la tienda
       }
       else if(player === 'player2'){
         this.activePlayer = this.p2;
-        this.activePlayerTag = 'player2'
+        this.whoIsPlaying('player2')
+       // Envía el jugador activo a la tienda
       }
     }
   },

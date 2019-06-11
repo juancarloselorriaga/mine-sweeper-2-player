@@ -12,8 +12,13 @@
 
     <div v-if="this.mined && this.clicks > 0" class="mine-wrapper">
       <img class="shapeshifter play" src="@/assets/svg/boom/sprite_60fps.svg">
-      <img class="mine" :src="mineImg">
+      <img class="mine" :src="this.mineColor">
     </div>
+
+    <!-- <div v-if="this.mined && this.clicks > 0" class="mine-wrapper">
+      <img class="shapeshifter play" src="@/assets/svg/boom/sprite_60fps.svg">
+      <img class="mine" :src="mineImg">
+    </div> -->
   </div>
 </template>
 
@@ -31,7 +36,7 @@ export default {
     surroundingMines: Number,
     selectedCell: String,
     clicks: Number,
-    mineImg: String
+    mineColor: String
   },
   computed: {
     cellObj() {
@@ -54,7 +59,6 @@ export default {
   },
   methods: {
     select() {
-      console.log(this.mineImg)
       this.$emit("select", this.id, this.index);
       this.selected = true;
     }
@@ -248,5 +252,17 @@ export default {
 
 .h1 {
   font-size: 1.8rem;
+}
+
+.red-mine{
+  background-image: url("../assets/red-mine.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.blue-mine{
+  background-image: url("../assets/blue-mine.svg");
+  background-repeat: no-repeat;
+  background-position: center;
 }
 </style>

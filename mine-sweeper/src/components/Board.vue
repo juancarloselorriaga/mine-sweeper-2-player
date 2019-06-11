@@ -11,7 +11,7 @@
       :class="{ mined : !selectCell }"
       :mined="cell.isMined"
       :surrounding-mines="cell.surroundingMines"
-      :mineImg="mineColor"
+      :mineColor="cell.mineColor"
     ></Cell>
   </div>
 </template>
@@ -34,7 +34,7 @@ export default {
       calcY: 0,
       calcX: 0,
       cellNum: 254,
-      cells: [{ x: 0, y: 0, isMined: false, surroundingMines: 0, clicks: 0 }],
+      cells: [{ x: 0, y: 0, isMined: false, surroundingMines: 0, clicks: 0, mineColor: '' }],
       selectedCell: null,
       mineQty: 51,
       rdmArr: [],
@@ -53,7 +53,8 @@ export default {
             y: this.calcY,
             isMined: false,
             surroundingMines: 0,
-            clicks: 0
+            clicks: 0,
+            mineColor: ''
           });
         }
         if (this.calcX == 15 && this.calcY <= 14) {
@@ -64,7 +65,8 @@ export default {
             y: this.calcY,
             isMined: false,
             surroundingMines: 0,
-            clicks: 0
+            clicks: 0,
+            mineColor: ''
           });
         }
       }
@@ -272,16 +274,19 @@ export default {
       }
 
       this.checkClicks(this.cells[index].clicks);
+
+      //Revisa qué jugador está activo para asignarle el color de la mina a cell.mineColor, y pasa como prop para la celda.
+      if(this.activePlayer === 'player1'){
+        this.cells[index].mineColor = require('../assets/red-mine.svg');
+      }
+      else if(this.activePlayer === 'player2'){
+        this.cells[index].mineColor = require('../assets/blue-mine.svg');
+      }
+
     }
   },
-   computed: {
-    ...mapState(['lastCellClicks', 'player1Obj', 'player2Obj']),
-    mineColor() {
-      if(this.activePlayerTag === 'player1'){
-        return require('../assets/red-mine.svg')
-      }
-      return require('../assets/blue-mine.svg')
-    }
+  computed: {
+    ...mapState(['activePlayer'])
   },
   beforeMount() {
     this.initBoard();
