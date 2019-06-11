@@ -54,6 +54,7 @@ export default {
   },
   methods: {
     select() {
+      console.log(this.mineImg)
       this.$emit("select", this.id, this.index);
       this.selected = true;
     }

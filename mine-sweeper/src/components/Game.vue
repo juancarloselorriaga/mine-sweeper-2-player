@@ -11,7 +11,7 @@
     <div class="game__wrapper" id="mine-sweeper">
       <Score :found-mines="this.foundMines" :next="this.nextPlayerTrigger" @playerTurn="modalTrigger"></Score>
 
-      <Board @next="togglePlayer" @found="countMines" :found-mines="this.foundMines"></Board>
+      <Board @next="togglePlayer" @found="countMines" :found-mines="this.foundMines" :activePlayerTag="this.activePlayerTag"></Board>
     </div>
   </section>
   <Next-player-modal v-if="showModal" :activePlayer="this.activePlayer"></Next-player-modal>
@@ -38,7 +38,8 @@ export default {
       foundMines: 0,
       nextPlayerTrigger: false,
       activePlayer: '',
-      showModal: false
+      activePlayerTag: '',
+      showModal: false,
     };
   },
   methods: {
@@ -57,9 +58,11 @@ export default {
 
       if(player === 'player1'){
         this.activePlayer = this.p1;
+        this.activePlayerTag = 'player1'
       }
       else if(player === 'player2'){
         this.activePlayer = this.p2;
+        this.activePlayerTag = 'player2'
       }
     }
   },

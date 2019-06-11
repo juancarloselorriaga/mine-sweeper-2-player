@@ -11,7 +11,7 @@
       :class="{ mined : !selectCell }"
       :mined="cell.isMined"
       :surrounding-mines="cell.surroundingMines"
-      :mineImg="player2Obj"
+      :mineImg="mineColor"
     ></Cell>
   </div>
 </template>
@@ -26,7 +26,8 @@ export default {
     Cell
   },
   props: {
-    foundMines: Number
+    foundMines: Number,
+    activePlayerTag: String
   },
   data() {
     return {
@@ -170,8 +171,6 @@ export default {
           reAssign(e, index)
         }
       });
-      
-      console.log(arr)
     },
     checkZero(cell, index) {
       let cellObj = cell;
@@ -276,7 +275,13 @@ export default {
     }
   },
    computed: {
-    ...mapState(['lastCellClicks', 'player1Obj', 'player2Obj'])
+    ...mapState(['lastCellClicks', 'player1Obj', 'player2Obj']),
+    mineColor() {
+      if(this.activePlayerTag === 'player1'){
+        return require('../assets/red-mine.svg')
+      }
+      return require('../assets/blue-mine.svg')
+    }
   },
   beforeMount() {
     this.initBoard();
