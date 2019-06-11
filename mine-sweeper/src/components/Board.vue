@@ -11,7 +11,7 @@
       :class="{ mined : !selectCell }"
       :mined="cell.isMined"
       :surrounding-mines="cell.surroundingMines"
-      :mineImg="player1Obj"
+      :mineImg="player2Obj"
     ></Cell>
   </div>
 </template>

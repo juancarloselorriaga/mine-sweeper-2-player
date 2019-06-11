@@ -12,7 +12,7 @@
 
     <div v-if="this.mined && this.clicks > 0" class="mine-wrapper">
       <img class="shapeshifter play" src="@/assets/svg/boom/sprite_60fps.svg">
-      <img class="mine" src="@/assets/red-mine.svg">
+      <img class="mine" :src="mineImg">
     </div>
   </div>
 </template>
