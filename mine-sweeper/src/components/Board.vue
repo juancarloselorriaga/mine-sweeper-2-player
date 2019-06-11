@@ -66,7 +66,6 @@ export default {
           });
         }
       }
-
       this.rdmMine(this.rdmArr);
       this.checkMine();
 
@@ -136,12 +135,42 @@ export default {
       });
     },
     rdmMine(arr) {
-      for (let i = 0; i < this.mineQty; i++) {
-        let rdmLocX = this.cells[Math.floor(Math.random() * this.cellNum)].x;
-        let rdmLocY = this.cells[Math.floor(Math.random() * this.cellNum)].y;
-        arr.push([rdmLocX, rdmLocY]);
-        //console.log(arr[i][0], arr[i][1]) //Aqui poner una condicional para que los numeros no se repitan en el array
+
+      let searchForArr = (arr, position) =>{
+          let i, j, current;
+          for(i = 0; i < arr.length; ++i){
+            if(position.length === arr[i].length){
+              current = arr[i];
+              for(j = 0; position.length && position[j] === current[j]; ++j){
+                if(j === position.length)
+                return i;
+              }
+            }
+          }
+          return -1;
+        }
+
+      let reAssign = (e, index) => {
+        let rdm = this.cells[Math.floor(Math.random() * this.cellNum)];
+        let position = [rdm.x, rdm.y];
+        arr.splice(index, 1, position) 
       }
+
+      for (let i = 0; i < this.mineQty; i++) {
+      
+        let rdm = this.cells[Math.floor(Math.random() * this.cellNum)];
+        let position = [rdm.x, rdm.y];
+        arr.push(position);
+      }
+
+      arr.forEach((e,index) =>{
+        let dupArr = searchForArr(arr, e);
+        if(dupArr !== index){
+          reAssign(e, index)
+        }
+      });
+      
+      console.log(arr)
     },
     checkZero(cell, index) {
       let cellObj = cell;

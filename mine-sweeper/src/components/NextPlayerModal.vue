@@ -6,7 +6,7 @@
 
           <div class="modal-body">
             <slot name="body">
-              <span class="modal-title">Es el turno de {{ this.activePlayer }}</span>
+              <span class="modal-title">{{ this.activePlayer }}'s turn</span>
             </slot>
           </div>
 
@@ -67,6 +67,20 @@ export default {
 
 .modal-body {
   margin: 20px 0;
+}
+
+.modal-enter {
+  opacity: 0;
+}
+
+.modal-leave-active {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .btn {

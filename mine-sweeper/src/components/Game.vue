@@ -52,7 +52,7 @@ export default {
       return this.nextPlayerTrigger;
     },
     modalTrigger(player) {
-      this.showModal = true;
+      this.showModal = false;
 
       if(player === 'player1'){
         this.activePlayer = this.p1;
