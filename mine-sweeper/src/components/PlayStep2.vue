@@ -2,24 +2,49 @@
   <div class="container">
     <div class="wrapper">
       <span class="label">Player 1</span>
-      <span v-if="p1 !== ''" class="label label--red">{{p1}}</span>
-      <input v-if="p1 == ''" type="text" class="input" @keyup.enter="addPlayer1" v-model="player1" autofocus>
-      <span v-if="p1 == ''" class="instructions-lbl">Hit enter to assign player</span>
+
+      <transition name="fade" mode="out-in">
+        <input
+          v-if="p1 == ''"
+          type="text"
+          class="input"
+          @keyup.enter="addPlayer1"
+          v-model="player1"
+          autofocus
+          key="inputP1"
+        >
+        <span v-else class="label label--red" key="p1">{{p1}}</span>
+      </transition>
+      <transition name="fade">
+        <span v-if="p1 == ''" class="instructions-lbl">Hit enter to assign player</span>
+      </transition>
     </div>
+
+
     <div class="wrapper">
       <span class="label">Player 2</span>
-      <span v-if="p2 !== ''" class="label label--red">{{p2}}</span>
-      <input v-if="p2 == ''" type="text" class="input" @keyup.enter="addPlayer2" v-model="player2">
-      <span v-if="p2 == ''" class="instructions-lbl">Hit enter to assign player</span>
+
+      <transition name="fade" mode="out-in">
+        <input
+          v-if="p2 == ''"
+          type="text"
+          class="input"
+          @keyup.enter="addPlayer2"
+          v-model="player2"
+          autofocus
+          key="inputP2"
+        >
+        <span v-else class="label label--red" key="p2">{{p2}}</span>
+      </transition>
+      <transition name="fade">
+        <span v-if="p2 == ''" class="instructions-lbl">Hit enter to assign player</span>
+      </transition>
     </div>
 
-
-
-    <div class="label-wrapper">
-      <button class="play-btn"
-      @click="startGameReq"
-      v-if="p1 !== '' && p2 !== '' "
-      >Start game</button>
+    <div class="button-wrapper">
+      <transition name="slide-fade">
+        <button class="play-btn" @click="startGameReq" v-if="p1 !== '' && p2 !== '' ">Start game</button>
+      </transition>
     </div>
   </div>
 </template>
@@ -31,15 +56,15 @@ export default {
   name: "PlayStep2",
   data() {
     return {
-      player1: '',
-      player2: ''
+      player1: "",
+      player2: ""
     };
   },
   computed: {
     ...mapState(["p1", "p2"])
   },
   methods: {
-    ...mapMutations(['assignPlayer1', 'assignPlayer2', 'startGame' ]),
+    ...mapMutations(["assignPlayer1", "assignPlayer2", "startGame"]),
     addPlayer1() {
       if (this.player1) {
         this.assignPlayer1(this.player1);
@@ -52,15 +77,15 @@ export default {
         this.player2 = "";
       }
     },
-    startGameReq(){
-      this.$emit('startGameBtnClicked')
+    startGameReq() {
+      this.$emit("startGameBtnClicked");
     }
   }
 };
 </script>
 
 <style scoped>
-h2{
+h2 {
   text-align: start;
   font-size: 3rem;
   color: #24305e;
@@ -73,11 +98,12 @@ h2{
 .container {
   height: 80vh;
   width: 90%;
+  transition: all 0.3 ease-in-out;
 }
 
 .label,
 .input {
-  font-size: 2rem;
+  font-size: 3rem;
   color: #24305e;
   font-family: "Now";
   font-weight: 400;
@@ -92,6 +118,7 @@ h2{
 }
 
 .label--red {
+  font-size: 2.5rem;
   color: #f76c6c;
 }
 
@@ -110,6 +137,8 @@ h2{
 .wrapper {
   display: flex;
   flex-direction: column;
+  transition: all 0.3 ease-in-out;
+  height: 25%;
 }
 
 .instructions-lbl {
@@ -120,8 +149,8 @@ h2{
   text-align: start;
 }
 
-.label-wrapper {
-  margin-top: 3rem;
+.button-wrapper {
+  height: 20%;
 }
 
 .play-btn {
@@ -149,5 +178,41 @@ h2{
   background-color: #24305e;
   color: white;
   border: 0.3rem white solid;
+}
+
+.slide-fade-enter-active {
+  transition: all 0.3s ease;
+}
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter, .slide-fade-leave-to {
+  transform: translateX(10px);
+  opacity: 0;
+}
+
+.bounce-enter-active {
+  animation: bounce-in .5s;
+}
+.bounce-leave-active {
+  animation: bounce-in .5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>

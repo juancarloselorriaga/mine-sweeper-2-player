@@ -11,11 +11,6 @@
           </div>
 
           <div class="modal-footer">
-            <slot name="footer">
-              <button class="btn" @click="$emit('close')">
-                OK
-              </button>
-            </slot>
           </div>
         </div>
       </div>

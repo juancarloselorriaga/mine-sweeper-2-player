@@ -1,8 +1,11 @@
 <template>
   <div class="home">
-    <PlayStep1 v-if="this.showPlayBtn" @playBtnClicked="playBtnClicked"></PlayStep1>
-    <PlayStep2 v-if="this.showPlyrs" @startGameBtnClicked="startGameBtnClicked"></PlayStep2>
-    <Game v-if="showGame"></Game>
+    <transition name="fade" mode="out-in">
+      <PlayStep1 v-if="this.showPlayBtn" @playBtnClicked="playBtnClicked"></PlayStep1>
+      <PlayStep2 v-if="this.showPlyrs" @startGameBtnClicked="startGameBtnClicked"></PlayStep2>
+      <Game v-if="showGame"></Game>
+    </transition>
+    
   </div>
 </template>
 
@@ -52,6 +55,11 @@ export default {
 </script>
 
 <style scoped>
-
+  .fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
 </style>
 

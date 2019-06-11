@@ -14,7 +14,7 @@
       <Board @next="togglePlayer" @found="countMines" :found-mines="this.foundMines"></Board>
     </div>
   </section>
-  <Next-player-modal v-if="showModal" :activePlayer="this.activePlayer" @close="showModal = false"></Next-player-modal>
+  <Next-player-modal v-if="showModal" :activePlayer="this.activePlayer"></Next-player-modal>
   </div>
 
 
@@ -52,7 +52,8 @@ export default {
       return this.nextPlayerTrigger;
     },
     modalTrigger(player) {
-      this.showModal = false;
+      this.showModal = true;
+      setTimeout(() => this.showModal = false, 800);
 
       if(player === 'player1'){
         this.activePlayer = this.p1;
