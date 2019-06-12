@@ -11,11 +11,11 @@
     <div class="game__wrapper" id="mine-sweeper">
       <Score :found-mines="this.foundMines" :next="this.nextPlayerTrigger" @playerTurn="modalTrigger"></Score>
 
-      <Board @next="togglePlayer" @found="countMines" :found-mines="this.foundMines" :activePlayerTag="this.activePlayerTag"></Board>
+      <Board :key="restartGame" @next="togglePlayer" @found="countMines" :found-mines="this.foundMines" :activePlayerTag="this.activePlayerTag"></Board>
     </div>
   </section>
   <Next-player-modal v-if="showModal" :activePlayer="this.activePlayer"></Next-player-modal>
-  <Winner-modal v-if="whoWon" :winner="whoWon"></Winner-modal>
+  <Winner-modal v-if="whoWon" :winner="whoWon" @playAgain="playAgain"></Winner-modal>
   </div>
 
 
@@ -43,10 +43,14 @@ export default {
       activePlayer: '',
       activePlayerTag: '',
       showModal: false,
+      restartGame: 0
     };
   },
   methods: {
     ...mapMutations(['whoIsPlaying']),
+    playAgain() {
+      return this.restartGame +=1;
+    },
     countMines(clicks) {
       if (clicks === 1) {
         this.foundMines++;
@@ -57,7 +61,7 @@ export default {
       return this.nextPlayerTrigger;
     },
     modalTrigger(player) {
-      this.showModal = false;
+      this.showModal = true;
       setTimeout(() => this.showModal = false, 800);
 
       if(player === 'player1'){

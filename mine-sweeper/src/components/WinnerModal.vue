@@ -10,7 +10,7 @@
               <span class="modal-title">{{ this.winner }} wins!!!</span>
             </slot>
             <div class="btn-wrapper">
-              <button class="btn">Play again</button>
+              <button class="btn" @click="playAgain">Play again</button>
               <button class="btn">Quit</button>
             </div>
           </div>
@@ -28,6 +28,11 @@ export default {
   name: 'Winner-modal',
   props: {
     winner: String
+  },
+  methods: {
+    playAgain() {
+      this.$emit("playAgain");
+    }
   }
 }
 </script>
@@ -86,23 +91,25 @@ export default {
 }
 
 .btn {
-  margin-top: 3rem;
+  margin: 3rem 1rem;
   padding: 1rem 10rem;
   font-weight: bold;
   font-size: 2rem;
-  color: #24305e;
+  color: white;
   font-family: "Now";
   font-weight: 400;
   line-height: 1.7;
   border-radius: 1.1rem;
-  border: 0.3rem #24305e solid;
+  border: 0.3rem white solid;
   box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease-in;
+  background-color: transparent;
 }
 
 .btn:hover {
   border: 0.3rem #f76c6c solid;
   color: #f76c6c;
+  background-color: white;
 }
 
 .btn:active {
