@@ -32,8 +32,8 @@ export default {
   },
   data() {
     return {
-      totalMines: 50,
-      pendingMines: 50,
+      totalMines: 51,
+      pendingMines: 51,
       players: [
         {
           name: '',

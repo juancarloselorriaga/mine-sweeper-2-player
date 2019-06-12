@@ -9,7 +9,8 @@ export default new Vuex.Store({
     p2: '',
     gameStatus: false,
     lastCellClicks: 0,
-    activePlayer: ''
+    activePlayer: '',
+    whoWon: ''
   },
   mutations: {
     assignPlayer1 (state, player1) {
@@ -26,6 +27,9 @@ export default new Vuex.Store({
     },
     whoIsPlaying(state, activePlayer){
       return state.activePlayer = activePlayer;
+    },
+    won(state, player){
+      return state.whoWon = player
     }
   },
   actions: {

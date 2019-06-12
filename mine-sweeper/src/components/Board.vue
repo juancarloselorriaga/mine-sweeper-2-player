@@ -139,7 +139,7 @@ export default {
       });
     },
     rdmMine(arr) {
-
+      
       let searchForArr = (arr, position) =>{
           let i, j, current;
           for(i = 0; i < arr.length; ++i){

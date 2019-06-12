@@ -11,6 +11,9 @@
 </template>
 
 <script>
+
+import {mapState, mapMutations} from 'vuex'
+
 export default {
   name: "Player",
   props: {
@@ -40,10 +43,16 @@ export default {
       };
     }
   },
+  methods: {
+    ...mapMutations(['won']),
+  },
   watch: {
     foundMines() {
       if (this.player.isActive) {
         this.player.mineCount++;
+        if(this.player.mineCount === 26){
+          this.won(this.player.name)
+        }
       }
     }
   }

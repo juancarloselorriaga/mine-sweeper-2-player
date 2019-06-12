@@ -15,6 +15,7 @@
     </div>
   </section>
   <Next-player-modal v-if="showModal" :activePlayer="this.activePlayer"></Next-player-modal>
+  <Winner-modal v-if="whoWon" :winner="whoWon"></Winner-modal>
   </div>
 
 
@@ -24,6 +25,7 @@
 import Board from "@/components/Board.vue";
 import Score from "@/components/Score.vue";
 import NextPlayerModal from "@/components/NextPlayerModal.vue";
+import WinnerModal from "@/components/WinnerModal.vue";
 import { mapState, mapMutations } from "vuex";
 
 export default {
@@ -31,7 +33,8 @@ export default {
   components: {
     Board,
     Score,
-    NextPlayerModal
+    NextPlayerModal,
+    WinnerModal
   },
   data() {
     return {
@@ -54,7 +57,7 @@ export default {
       return this.nextPlayerTrigger;
     },
     modalTrigger(player) {
-      this.showModal = true;
+      this.showModal = false;
       setTimeout(() => this.showModal = false, 800);
 
       if(player === 'player1'){
@@ -70,7 +73,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(["p1", "p2"])
+    ...mapState(["p1", "p2", "whoWon"])
   }
 };
 </script>
