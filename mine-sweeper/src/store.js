@@ -3,8 +3,20 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
+const initialState= () => {
+  return{
+    p1: '',
+    p2: '',
+    gameStatus: false,
+    lastCellClicks: 0,
+    activePlayer: '',
+    whoWon: ''
+  }
+}
+
 export default new Vuex.Store({
-  state: {
+  state: 
+  {
     p1: '',
     p2: '',
     gameStatus: false,
@@ -30,6 +42,11 @@ export default new Vuex.Store({
     },
     won(state, player){
       return state.whoWon = player
+    },
+    reset(state){
+      state.lastCellClicks = 0;
+      state.activePlayer = '';
+      state.whoWon = '';
     }
   },
   actions: {

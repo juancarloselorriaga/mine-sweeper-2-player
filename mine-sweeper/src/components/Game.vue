@@ -4,18 +4,18 @@
   <section id="game" class="game">
     <div class="game__menu">
       <div class="game__menu-wrapper">
-        <label class="game__menu-item">Restart</label>
+        <label @click="restartModal = true" class="game__menu-item">Restart</label>
         <label class="game__menu-item">Quit</label>
       </div>
     </div>
     <div class="game__wrapper" id="mine-sweeper">
-      <Score :found-mines="this.foundMines" :next="this.nextPlayerTrigger" @playerTurn="modalTrigger"></Score>
-
+      <Score :key="restartScore" :found-mines="this.foundMines" :next="this.nextPlayerTrigger" @playerTurn="modalTrigger"></Score>
       <Board :key="restartGame" @next="togglePlayer" @found="countMines" :found-mines="this.foundMines" :activePlayerTag="this.activePlayerTag"></Board>
     </div>
   </section>
   <Next-player-modal v-if="showModal" :activePlayer="this.activePlayer"></Next-player-modal>
   <Winner-modal v-if="whoWon" :winner="whoWon" @playAgain="playAgain"></Winner-modal>
+  <Restart-modal v-if="restartModal" @playAgain="playAgain"></Restart-modal>
   </div>
 
 
@@ -26,6 +26,7 @@ import Board from "@/components/Board.vue";
 import Score from "@/components/Score.vue";
 import NextPlayerModal from "@/components/NextPlayerModal.vue";
 import WinnerModal from "@/components/WinnerModal.vue";
+import RestartModal from "@/components/RestartModal.vue";
 import { mapState, mapMutations } from "vuex";
 
 export default {
@@ -34,7 +35,8 @@ export default {
     Board,
     Score,
     NextPlayerModal,
-    WinnerModal
+    WinnerModal,
+    RestartModal
   },
   data() {
     return {
@@ -43,12 +45,18 @@ export default {
       activePlayer: '',
       activePlayerTag: '',
       showModal: false,
-      restartGame: 0
+      restartGame: 0,
+      restartScore: 1,
+      restartModal: false
     };
   },
   methods: {
-    ...mapMutations(['whoIsPlaying']),
+    ...mapMutations(['whoIsPlaying', 'reset']),
     playAgain() {
+      this.restartScore +=1;
+      this.reset()
+      this.foundMines = 0;
+      this.restartModal = false;
       return this.restartGame +=1;
     },
     countMines(clicks) {
@@ -61,7 +69,7 @@ export default {
       return this.nextPlayerTrigger;
     },
     modalTrigger(player) {
-      this.showModal = true;
+      this.showModal = false;
       setTimeout(() => this.showModal = false, 800);
 
       if(player === 'player1'){
