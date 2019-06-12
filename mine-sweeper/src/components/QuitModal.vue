@@ -6,12 +6,11 @@
 
           <div class="modal-body">
             <slot name="body">
-              <img src="@/assets/winner.svg" alt="winner-img" class="winner-img">
-              <span class="modal-title">{{ this.winner }} wins!!!</span>
+              <img src="@/assets/quit.svg" alt="restart-img">
+              <span class="modal-title"> Are you sure? </span>
             </slot>
             <div class="btn-wrapper">
-              <button class="btn" @click="playAgain">Play again</button>
-              <button class="btn" @click="quit">Quit</button>
+              <button class="btn" @click="quit">Yes, quit this game</button>
             </div>
           </div>
 
@@ -25,14 +24,11 @@
 
 <script>
 export default {
-  name: 'Winner-modal',
+  name: 'Quit-modal',
   props: {
     winner: String
   },
   methods: {
-    playAgain() {
-      this.$emit("playAgain");
-    },
     quit() {
       this.$emit("quit");
     }

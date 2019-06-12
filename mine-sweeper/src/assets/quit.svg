@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="258px" height="255px" viewBox="0 0 258 255" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.1 (78136) - https://sketchapp.com -->
+    <title>restart copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-7.3%" y="-7.3%" width="114.6%" height="114.6%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="restart-copy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" filter="url(#filter-1)" transform="translate(12.500000, 11.000000)" fill="#F76C6C" stroke="#F76C6C" stroke-width="10">
+            <circle id="Oval" cx="116.5" cy="116.5" r="116.5"></circle>
+        </g>
+        <path d="M180.5,58 L77.5,196.332873" id="Line-2" stroke="#FFFFFF" stroke-width="19" stroke-linecap="round"></path>
+        <path d="M180.5,58 L77.5,196.332873" id="Line-2-Copy" stroke="#FFFFFF" stroke-width="19" stroke-linecap="round" transform="translate(129.000000, 127.500000) scale(-1, 1) translate(-129.000000, -127.500000) "></path>
+    </g>
+</svg>

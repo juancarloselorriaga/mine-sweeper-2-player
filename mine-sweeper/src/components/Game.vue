@@ -5,7 +5,7 @@
     <div class="game__menu">
       <div class="game__menu-wrapper">
         <label @click="restartModal = true" class="game__menu-item">Restart</label>
-        <label class="game__menu-item">Quit</label>
+        <label @click="quitModal = true" class="game__menu-item">Quit</label>
       </div>
     </div>
     <div class="game__wrapper" id="mine-sweeper">
@@ -14,8 +14,9 @@
     </div>
   </section>
   <Next-player-modal v-if="showModal" :activePlayer="this.activePlayer"></Next-player-modal>
-  <Winner-modal v-if="whoWon" :winner="whoWon" @playAgain="playAgain"></Winner-modal>
+  <Winner-modal v-if="whoWon" :winner="whoWon" @playAgain="playAgain" @quit="quitGame"></Winner-modal>
   <Restart-modal v-if="restartModal" @playAgain="playAgain"></Restart-modal>
+  <Quit-modal v-if="quitModal" @quit="quitGame"></Quit-modal>
   </div>
 
 
@@ -27,6 +28,7 @@ import Score from "@/components/Score.vue";
 import NextPlayerModal from "@/components/NextPlayerModal.vue";
 import WinnerModal from "@/components/WinnerModal.vue";
 import RestartModal from "@/components/RestartModal.vue";
+import QuitModal from "@/components/QuitModal.vue";
 import { mapState, mapMutations } from "vuex";
 
 export default {
@@ -36,7 +38,8 @@ export default {
     Score,
     NextPlayerModal,
     WinnerModal,
-    RestartModal
+    RestartModal,
+    QuitModal
   },
   data() {
     return {
@@ -47,11 +50,15 @@ export default {
       showModal: false,
       restartGame: 0,
       restartScore: 1,
-      restartModal: false
+      restartModal: false,
+      quitModal: false
     };
   },
   methods: {
     ...mapMutations(['whoIsPlaying', 'reset']),
+    quitGame(){
+      this.$emit("quitGame");
+    },
     playAgain() {
       this.restartScore +=1;
       this.reset()
@@ -69,7 +76,7 @@ export default {
       return this.nextPlayerTrigger;
     },
     modalTrigger(player) {
-      this.showModal = false;
+      this.showModal = true;
       setTimeout(() => this.showModal = false, 800);
 
       if(player === 'player1'){

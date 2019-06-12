@@ -3,7 +3,7 @@
     <transition name="fade" mode="out-in">
       <PlayStep1 v-if="this.showPlayBtn" @playBtnClicked="playBtnClicked"></PlayStep1>
       <PlayStep2 v-if="this.showPlyrs" @startGameBtnClicked="startGameBtnClicked"></PlayStep2>
-      <Game v-if="showGame"></Game>
+      <Game v-if="showGame" @quitGame="quitGame"></Game>
     </transition>
     
   </div>
@@ -30,10 +30,18 @@ export default {
     }
   },
   methods: {
-    ...mapMutations([ 'assignPlayer1', 'assignPlayer2' ]),
+    ...mapMutations([ 'assignPlayer1', 'assignPlayer2', 'reset', 'resetPlayers' ]),
+    quitGame(){
+      this.showPlayBtn = true;
+      this.showPlyrs = false;
+      this.showGame = false;
+      this.reset();
+      this.resetPlayers();
+    },
     playBtnClicked(){
       this.showPlayBtn = false;
       this.showPlyrs = true;
+
     },
     startGame(){
       if(this.gameStatus){

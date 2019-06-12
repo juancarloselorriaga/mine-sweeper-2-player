@@ -47,6 +47,11 @@ export default new Vuex.Store({
       state.lastCellClicks = 0;
       state.activePlayer = '';
       state.whoWon = '';
+    },
+    resetPlayers(state){
+      state.p1 = '',
+      state.p2 = '',
+      state.gameStatus = false
     }
   },
   actions: {
