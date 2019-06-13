@@ -3,9 +3,10 @@
   <div>
   <section id="game" class="game">
     <div class="game__menu">
+      <label class="btn" @click.prevent="audio.isPlaying ? pause(audio) : play(audio)" :class="{ 'btn--audio-off': !audio.isPlaying }"></label>
       <div class="game__menu-wrapper">
-        <label @click="restartModal = true" class="game__menu-item">Restart</label>
-        <label @click="quitModal = true" class="game__menu-item">Quit</label>
+        <label @click="restartClicked" class="game__menu-item">Restart</label>
+        <label @click="quitClicked" class="game__menu-item">Quit</label>
       </div>
     </div>
     <div class="game__wrapper" id="mine-sweeper">
@@ -15,8 +16,8 @@
   </section>
   <Next-player-modal v-if="showModal" :activePlayer="this.activePlayer"></Next-player-modal>
   <Winner-modal v-if="whoWon" :winner="whoWon" @playAgain="playAgain" @quit="quitGame"></Winner-modal>
-  <Restart-modal v-if="restartModal" @playAgain="playAgain"></Restart-modal>
-  <Quit-modal v-if="quitModal" @quit="quitGame"></Quit-modal>
+  <Restart-modal v-if="restartModal" @playAgain="playAgain" @resume="resumeClicked"></Restart-modal>
+  <Quit-modal v-if="quitModal" @quit="quitGame" @resume="resumeClicked"></Quit-modal>
   </div>
 
 
@@ -51,7 +52,14 @@ export default {
       restartGame: 0,
       restartScore: 1,
       restartModal: false,
-      quitModal: false
+      quitModal: false,
+      audio: {
+        id: 'background',
+        file: new Audio(require("../audio/background.mp3")),
+        isPlaying: false,
+        maxVol: 0.6,
+        minVol: 0.1
+      }
     };
   },
   methods: {
@@ -89,10 +97,45 @@ export default {
         this.whoIsPlaying('player2')
        // Envía el jugador activo a la tienda
       }
+    },
+    restartClicked(){
+      this.restartModal = true;
+      this.lowerVolume(this.audio);
+    },
+    quitClicked(){
+      this.quitModal = true;
+      this.lowerVolume(this.audio);
+    },
+    resumeClicked(){
+      this.restartModal = false;
+      this.quitModal = false;
+      this.riseVolume(this.audio);
+    },
+    play(audio) {
+      audio.isPlaying = true;
+      audio.file.loop = true;
+      audio.file.play();
+      this.riseVolume(audio);
+    },
+    pause(audio) {
+      audio.isPlaying = false;
+      audio.file.pause();
+    },
+    lowerVolume(audio){
+      audio.file.volume = audio.minVol;
+    },
+    riseVolume(audio){
+      audio.file.volume = audio.maxVol;
     }
   },
   computed: {
     ...mapState(["p1", "p2", "whoWon"])
+  },
+  created(){
+    this.play(this.audio);
+  },
+  destroyed(){
+    this.pause(this.audio);
   }
 };
 </script>
@@ -154,5 +197,17 @@ export default {
   -webkit-box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.3);
   box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.3);
+}
+
+.btn {
+  width: 50px;
+  height: 50px;
+  transition: all 0.3s ease-in;
+  background-color: transparent;
+  background: url("../assets/audio-on.svg")
+}
+
+.btn--audio-off{
+  background: url("../assets/audio-off.svg")
 }
 </style>

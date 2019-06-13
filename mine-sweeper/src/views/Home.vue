@@ -37,11 +37,18 @@ export default {
       this.showGame = false;
       this.reset();
       this.resetPlayers();
+      this.playSound(require('../audio/quit.mp3'))
+    },
+    playSound (sound) {
+      if(sound) {
+        var audio = new Audio(sound);
+        audio.play();
+    }
     },
     playBtnClicked(){
       this.showPlayBtn = false;
       this.showPlyrs = true;
-
+      this.playSound(require('../audio/button.wav'))
     },
     startGame(){
       if(this.gameStatus){

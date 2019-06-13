@@ -66,21 +66,31 @@ export default {
   },
   methods: {
     ...mapMutations(["assignPlayer1", "assignPlayer2", "startGame"]),
+    playSound (sound, volume) {
+      if(sound) {
+        var audio = new Audio(sound);
+        audio.volume = volume;
+        audio.play();
+      }
+    },
     addPlayer1() {
       if (this.player1) {
         this.assignPlayer1(this.player1);
         this.player1 = "";
         this.$refs.player2.focus();
+        this.playSound(require('../audio/confirmation.wav'), 1)
       }
     },
     addPlayer2() {
       if (this.player2) {
         this.assignPlayer2(this.player2);
         this.player2 = "";
+        this.playSound(require('../audio/confirmation.wav'), 1)
       }
     },
     startGameReq() {
       this.$emit("startGameBtnClicked");
+      this.playSound(require('../audio/button.wav'), 0.8)
     }
   }
 };
@@ -141,6 +151,7 @@ h2 {
   flex-direction: column;
   transition: all 0.3 ease-in-out;
   height: 25%;
+  margin: 1rem;
 }
 
 .instructions-lbl {

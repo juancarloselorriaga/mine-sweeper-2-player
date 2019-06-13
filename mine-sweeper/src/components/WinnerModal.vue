@@ -30,12 +30,21 @@ export default {
     winner: String
   },
   methods: {
+    playSound (sound) {
+      if(sound) {
+        var audio = new Audio(sound);
+        audio.play();
+      }
+      },
     playAgain() {
       this.$emit("playAgain");
     },
     quit() {
       this.$emit("quit");
     }
+  },
+  mounted(){
+    this.playSound(require('../audio/winner.mp3'))
   }
 }
 </script>

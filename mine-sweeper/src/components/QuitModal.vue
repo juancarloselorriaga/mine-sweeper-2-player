@@ -7,10 +7,11 @@
           <div class="modal-body">
             <slot name="body">
               <img src="@/assets/quit.svg" alt="restart-img">
-              <span class="modal-title"> Are you sure? </span>
+              <span class="modal-title"> Do you want to quit this game? </span>
             </slot>
             <div class="btn-wrapper">
               <button class="btn" @click="quit">Yes, quit this game</button>
+              <button class="btn" @click="resume">Resume</button>
             </div>
           </div>
 
@@ -31,7 +32,21 @@ export default {
   methods: {
     quit() {
       this.$emit("quit");
+    },
+    playSound (sound, volume) {
+      if(sound) {
+        var audio = new Audio(sound);
+        audio.volume = volume;
+        audio.play();
+      }
+    },
+    resume(){
+      this.playSound(require('../audio/pause.wav'), 0.4)
+      this.$emit("resume");
     }
+  },
+  mounted(){
+    this.playSound(require('../audio/pause.wav'), 0.4)
   }
 }
 </script>

@@ -7,10 +7,11 @@
           <div class="modal-body">
             <slot name="body">
               <img src="@/assets/restart.svg" alt="restart-img">
-              <span class="modal-title"> Are you sure? </span>
+              <span class="modal-title"> Restart this match? </span>
             </slot>
             <div class="btn-wrapper">
-              <button class="btn" @click="playAgain">Yes, restart this game</button>
+              <button class="btn" @click="playAgain">Restart</button>
+              <button class="btn" @click="resume">Resume</button>
             </div>
           </div>
 
@@ -29,9 +30,24 @@ export default {
     winner: String
   },
   methods: {
+    playSound (sound, volume) {
+      if(sound) {
+        var audio = new Audio(sound);
+        audio.volume = volume;
+        audio.play();
+      }
+    },
     playAgain() {
+      this.playSound(require('../audio/button.wav'), 0.8)
       this.$emit("playAgain");
+    },
+    resume(){
+      this.playSound(require('../audio/pause.wav'), 0.4)
+      this.$emit("resume");
     }
+  },
+  mounted(){
+    this.playSound(require('../audio/pause.wav'), 0.4)
   }
 }
 </script>

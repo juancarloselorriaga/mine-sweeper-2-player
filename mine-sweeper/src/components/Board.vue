@@ -271,6 +271,10 @@ export default {
 
       if (this.cells[index].isMined) {
         this.$emit("found", this.cells[index].clicks);
+        this.playSound(require('../audio/underwater.wav'), 1)
+      }
+      else{
+        this.playSound(require('../audio/bubble.wav'), 0.8)
       }
 
       this.checkClicks(this.cells[index].clicks);
@@ -282,7 +286,13 @@ export default {
       else if(this.activePlayer === 'player2'){
         this.cells[index].mineColor = require('../assets/blue-mine.svg');
       }
-
+    },
+    playSound (sound, volume) {
+      if(sound) {
+        var audio = new Audio(sound);
+        audio.volume = volume
+        audio.play();
+      }
     }
   },
   computed: {
