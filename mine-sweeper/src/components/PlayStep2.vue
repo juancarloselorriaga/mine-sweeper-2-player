@@ -1,5 +1,7 @@
 <template>
   <div class="container">
+    <div class="flex-row-wrapper">
+
     <div class="wrapper">
       <span class="label">Player 1</span>
 
@@ -16,7 +18,7 @@
         <span v-else class="label label--red" key="p1">{{p1}}</span>
       </transition>
       <transition name="fade">
-        <span v-if="p1 == ''" class="instructions-lbl">Hit enter to assign player</span>
+        <span class="instructions-lbl">{{ p1 == "" ? 'Hit enter to assign player' : '' }}</span>
       </transition>
     </div>
 
@@ -34,13 +36,14 @@
           autofocus
           key="inputP2"
         >
-        <span v-else class="label label--red" key="p2">{{p2}}</span>
+        <span v-else class="label label--blue" key="p2">{{p2}}</span>
       </transition>
       <transition name="fade">
-        <span v-if="p2 == ''" class="instructions-lbl">Hit enter to assign player</span>
+        <span class="instructions-lbl">{{ p2 == "" ? 'Hit enter to assign player' : '&nbsp' }}</span>
       </transition>
     </div>
 
+    </div>
     <div class="button-wrapper">
       <transition name="slide-fade">
         <button class="play-btn" @click="startGameReq" v-if="p1 !== '' && p2 !== '' ">Start game</button>
@@ -107,30 +110,41 @@ h2 {
 }
 
 .container {
-  height: 80vh;
+  height: 100vh;
   width: 90%;
   transition: all 0.3 ease-in-out;
 }
 
 .label,
 .input {
-  font-size: 3rem;
+  font-size: 2rem;
   color: #24305e;
   font-family: "Now";
   font-weight: 400;
   line-height: 1.7;
+  width: 70%;
 }
 
 .label {
+  justify-self: flex-end;
   display: block;
   width: 45rem;
-  text-align: start;
+  text-align: center;
   margin-bottom: 1rem;
 }
 
+.label--red,
+.label--blue{
+  font-size: 4.5rem;
+  text-decoration: underline;
+}
+
 .label--red {
-  font-size: 2.5rem;
   color: #f76c6c;
+}
+
+.label--blue {
+  color: #7893c3;
 }
 
 .input {
@@ -148,8 +162,10 @@ h2 {
 .wrapper {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   transition: all 0.3 ease-in-out;
-  height: 25%;
+  height: 30%;
   margin: 1rem;
 }
 
@@ -162,7 +178,7 @@ h2 {
 }
 
 .button-wrapper {
-  height: 20%;
+  height: 50vh;
 }
 
 .play-btn {
@@ -192,8 +208,14 @@ h2 {
   border: 0.3rem white solid;
 }
 
+.flex-row-wrapper{
+  display: flex;
+  align-items: flex-end;
+  height: 50vh;
+}
+
 .slide-fade-enter-active {
-  transition: all 0.3s ease;
+  transition: all 0.3s ease 0.8s;
 }
 .slide-fade-leave-active {
   transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);

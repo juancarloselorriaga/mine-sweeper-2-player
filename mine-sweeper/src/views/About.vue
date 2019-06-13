@@ -24,6 +24,13 @@
 
 <style scoped>
 
+.about{
+  width: 85vw;
+  height: 100vh;
+  position: absolute;
+  right: 0;
+}
+
 .heart{
   color:#e25555;
   }

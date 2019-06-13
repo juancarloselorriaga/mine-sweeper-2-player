@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div class="help">
     <h1>Instructions</h1>
     <div class="container">
       <div class="wrapper">
@@ -75,6 +75,13 @@
 
 <style scoped>
 
+.help{
+  width: 85vw;
+  height: 100vh;
+  position: absolute;
+  right: 0;
+}
+
 .container {
   width: 50%;
   position: relative;
@@ -88,8 +95,9 @@
 
 .title {
   display: block;
-  font-size: 2rem;
-  margin: 2rem 0;
+  font-size: 2.5rem;
+  margin: 5rem 0;
+  text-align: center;
 }
 
 .body-item-unordered {

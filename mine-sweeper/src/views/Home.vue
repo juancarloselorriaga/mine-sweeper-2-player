@@ -81,6 +81,14 @@ export default {
 </script>
 
 <style scoped>
+
+.home{
+  width: 85vw;
+  height: 100vh;
+  position: absolute;
+  right: 0;
+}
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s;

@@ -7,8 +7,8 @@
         </div>
       </div>
       <div class="nav__item-wrapper">
-        <router-link class="link" to="/">Play</router-link>|
-        <router-link class="link" to="/help">Help</router-link>|
+        <router-link class="link" to="/">Play</router-link> -
+        <router-link class="link" to="/help">Help</router-link> -
         <router-link class="link" to="/about">About</router-link>
       </div>
       <hr>
@@ -43,8 +43,14 @@ html {
   background-color: white;
 }
 #nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 15vw;
   padding: 1rem;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.3);
@@ -64,7 +70,8 @@ html {
 }
 
 .nav__item-wrapper {
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
 }
 
 .game__menu {
@@ -74,7 +81,7 @@ html {
 }
 
 .head__logo {
-  width: 25rem;
+  width: 90%;
 }
 
 .head__logo-img {

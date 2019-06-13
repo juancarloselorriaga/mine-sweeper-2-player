@@ -5,7 +5,7 @@
         <div class="modal-container">
           <div class="modal-body">
             <slot name="body">
-              <img src="@/assets/restart.svg" alt="restart-img">
+              <img src="@/assets/restart.svg" alt="restart-img" class="img">
               <span class="modal-title">Restart this match?</span>
             </slot>
             <div class="btn-wrapper">
@@ -53,12 +53,12 @@ export default {
 
 <style scoped>
 .modal-mask {
-  position: fixed;
+  position: absolute;
   z-index: 9998;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   display: table;
   transition: opacity 0.3s ease;
@@ -86,6 +86,8 @@ export default {
   margin: 20px 0;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal-enter {
@@ -127,6 +129,11 @@ export default {
 .modal-title {
   font-size: 4rem;
   color: white;
+}
+
+.img{
+ margin-bottom: 5rem;
+ width: 20rem;
 }
 </style>
 

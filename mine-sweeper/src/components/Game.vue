@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="parent">
     <section id="game" class="game">
       <div class="game__menu">
         <label
@@ -163,11 +163,12 @@ export default {
 
 <style scoped>
 .game {
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0rem 0;
+  padding-bottom: 1rem;
 }
 
 .game__menu {
@@ -175,6 +176,7 @@ export default {
   justify-content: flex-end;
   align-items: center;
   padding: 1rem;
+  margin: 0;
   min-width: 92.4rem;
 }
 
@@ -220,15 +222,26 @@ export default {
   box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.3);
 }
 
+.container {
+  width: 50%;
+  position: relative;
+  text-align: start;
+  padding: 3rem;
+}
+
 .btn {
-  width: 50px;
-  height: 50px;
+  width: 44px;
+  height: 44px;
   transition: all 0.3s ease-in;
   background-color: transparent;
-  background: url("../assets/audio-on.svg");
+  background: url("../assets/audio-on.svg") center no-repeat;
 }
 
 .btn--audio-off {
-  background: url("../assets/audio-off.svg");
+  background: url("../assets/audio-off.svg")  center no-repeat;
+}
+
+.parent{
+  position: relative;
 }
 </style>
