@@ -10,8 +10,8 @@
               <span class="modal-title">{{ this.winner }} wins!!!</span>
             </slot>
             <div class="btn-wrapper">
-              <button class="btn" @click="playAgain">Play again</button>
-              <button class="btn" @click="quit">Quit</button>
+              <label class="btn" @click="playAgain">Play again</label>
+              <label class="btn" @click="quit">Quit</label>
             </div>
           </div>
 
@@ -30,13 +30,15 @@ export default {
     winner: String
   },
   methods: {
-    playSound (sound) {
+    playSound (sound, volume) {
       if(sound) {
         var audio = new Audio(sound);
+        audio.volume = volume;
         audio.play();
       }
-      },
+    },
     playAgain() {
+      this.playSound(require('../audio/button.wav'), 0.8)
       this.$emit("playAgain");
     },
     quit() {
@@ -44,7 +46,8 @@ export default {
     }
   },
   mounted(){
-    this.playSound(require('../audio/winner.mp3'))
+    this.playSound(require('../audio/winner.mp3'), 1)
+    this.$emit("weHaveWinner");
   }
 }
 </script>
@@ -104,35 +107,28 @@ export default {
 
 .btn {
   margin: 3rem 1rem;
-  padding: 1rem 10rem;
+  padding: 1rem 5rem;
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: white;
   font-family: "Now";
   font-weight: 400;
   line-height: 1.7;
   border-radius: 1.1rem;
-  border: 0.3rem white solid;
-  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease-in;
-  background-color: transparent;
 }
 
 .btn:hover {
-  border: 0.3rem #f76c6c solid;
   color: #f76c6c;
   background-color: white;
 }
 
-.btn:active {
-  box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.3);
-  background-color: #24305e;
-  color: white;
-  border: 0.3rem white solid;
+.btn-wrapper{
+  margin-top: 3rem;
 }
 
 .modal-title{
-  font-size: 7rem;
+  font-size: 4rem;
   color: white;
 }
 

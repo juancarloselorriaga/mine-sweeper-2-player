@@ -15,7 +15,7 @@
     </div>
   </section>
   <Next-player-modal v-if="showModal" :activePlayer="this.activePlayer"></Next-player-modal>
-  <Winner-modal v-if="whoWon" :winner="whoWon" @playAgain="playAgain" @quit="quitGame"></Winner-modal>
+  <Winner-modal v-if="whoWon" :winner="whoWon" @playAgain="playAgain" @quit="quitGame" @weHaveWinner="weHaveWinner"></Winner-modal>
   <Restart-modal v-if="restartModal" @playAgain="playAgain" @resume="resumeClicked"></Restart-modal>
   <Quit-modal v-if="quitModal" @quit="quitGame" @resume="resumeClicked"></Quit-modal>
   </div>
@@ -72,6 +72,7 @@ export default {
       this.reset()
       this.foundMines = 0;
       this.restartModal = false;
+      this.riseVolume(this.audio);
       return this.restartGame +=1;
     },
     countMines(clicks) {
@@ -110,6 +111,9 @@ export default {
       this.restartModal = false;
       this.quitModal = false;
       this.riseVolume(this.audio);
+    },
+    weHaveWinner(){
+      this.lowerVolume(this.audio);
     },
     play(audio) {
       audio.isPlaying = true;
