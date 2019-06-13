@@ -1,9 +1,8 @@
 <template>
-    <transition name="modal">
+  <transition name="modal">
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
-
           <div class="modal-body">
             <slot name="body">
               <img src="@/assets/winner.svg" alt="winner-img" class="winner-img">
@@ -15,8 +14,7 @@
             </div>
           </div>
 
-          <div class="modal-footer">
-          </div>
+          <div class="modal-footer"></div>
         </div>
       </div>
     </div>
@@ -25,36 +23,35 @@
 
 <script>
 export default {
-  name: 'Winner-modal',
+  name: "Winner-modal",
   props: {
     winner: String
   },
   methods: {
-    playSound (sound, volume) {
-      if(sound) {
+    playSound(sound, volume) {
+      if (sound) {
         var audio = new Audio(sound);
         audio.volume = volume;
         audio.play();
       }
     },
     playAgain() {
-      this.playSound(require('../audio/button.wav'), 0.8)
+      this.playSound(require("../audio/button.wav"), 0.8);
       this.$emit("playAgain");
     },
     quit() {
       this.$emit("quit");
     }
   },
-  mounted(){
-    this.playSound(require('../audio/winner.mp3'), 1)
+  mounted() {
+    this.playSound(require("../audio/winner.mp3"), 1);
     this.$emit("weHaveWinner");
   }
-}
+};
 </script>
 
 
 <style scoped>
-
 .modal-mask {
   position: fixed;
   z-index: 9998;
@@ -62,9 +59,9 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(0, 0, 0, 0.5);
   display: table;
-  transition: opacity .3s ease;
+  transition: opacity 0.3s ease;
 }
 
 .modal-wrapper {
@@ -77,7 +74,7 @@ export default {
   margin: 0px auto;
   padding: 20px 30px;
 
-  transition: all .3s ease;
+  transition: all 0.3s ease;
 }
 
 .modal-header h3 {
@@ -123,14 +120,13 @@ export default {
   background-color: white;
 }
 
-.btn-wrapper{
+.btn-wrapper {
   margin-top: 3rem;
 }
 
-.modal-title{
+.modal-title {
   font-size: 4rem;
   color: white;
 }
-
 </style>
 

@@ -1,17 +1,15 @@
 <template>
-    <transition name="modal">
+  <transition name="modal">
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
-
           <div class="modal-body">
             <slot name="body">
               <span class="modal-title">{{ this.activePlayer }}'s turn</span>
             </slot>
           </div>
 
-          <div class="modal-footer">
-          </div>
+          <div class="modal-footer"></div>
         </div>
       </div>
     </div>
@@ -20,16 +18,15 @@
 
 <script>
 export default {
-  name: 'Next-player-modal',
+  name: "Next-player-modal",
   props: {
     activePlayer: String
   }
-}
+};
 </script>
 
 
 <style scoped>
-
 .modal-mask {
   position: fixed;
   z-index: 9998;
@@ -37,9 +34,9 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(0, 0, 0, 0.5);
   display: table;
-  transition: opacity .3s ease;
+  transition: opacity 0.3s ease;
 }
 
 .modal-wrapper {
@@ -52,7 +49,7 @@ export default {
   margin: 0px auto;
   padding: 20px 30px;
 
-  transition: all .3s ease;
+  transition: all 0.3s ease;
 }
 
 .modal-header h3 {
@@ -105,7 +102,7 @@ export default {
   border: 0.3rem white solid;
 }
 
-.modal-title{
+.modal-title {
   font-size: 7rem;
   color: white;
 }

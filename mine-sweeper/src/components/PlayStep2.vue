@@ -20,7 +20,6 @@
       </transition>
     </div>
 
-
     <div class="wrapper">
       <span class="label">Player 2</span>
 
@@ -66,8 +65,8 @@ export default {
   },
   methods: {
     ...mapMutations(["assignPlayer1", "assignPlayer2", "startGame"]),
-    playSound (sound, volume) {
-      if(sound) {
+    playSound(sound, volume) {
+      if (sound) {
         var audio = new Audio(sound);
         audio.volume = volume;
         audio.play();
@@ -78,19 +77,19 @@ export default {
         this.assignPlayer1(this.player1);
         this.player1 = "";
         this.$refs.player2.focus();
-        this.playSound(require('../audio/confirmation.wav'), 1)
+        this.playSound(require("../audio/confirmation.wav"), 1);
       }
     },
     addPlayer2() {
       if (this.player2) {
         this.assignPlayer2(this.player2);
         this.player2 = "";
-        this.playSound(require('../audio/confirmation.wav'), 1)
+        this.playSound(require("../audio/confirmation.wav"), 1);
       }
     },
     startGameReq() {
       this.$emit("startGameBtnClicked");
-      this.playSound(require('../audio/button.wav'), 0.8)
+      this.playSound(require("../audio/button.wav"), 0.8);
     }
   }
 };
@@ -199,16 +198,17 @@ h2 {
 .slide-fade-leave-active {
   transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
 }
-.slide-fade-enter, .slide-fade-leave-to {
+.slide-fade-enter,
+.slide-fade-leave-to {
   transform: translateX(10px);
   opacity: 0;
 }
 
 .bounce-enter-active {
-  animation: bounce-in .5s;
+  animation: bounce-in 0.5s;
 }
 .bounce-leave-active {
-  animation: bounce-in .5s reverse;
+  animation: bounce-in 0.5s reverse;
 }
 @keyframes bounce-in {
   0% {
@@ -222,8 +222,9 @@ h2 {
   }
 }
 
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;

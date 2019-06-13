@@ -1,26 +1,44 @@
 <template>
-
   <div>
-  <section id="game" class="game">
-    <div class="game__menu">
-      <label class="btn" @click.prevent="audio.isPlaying ? pause(audio) : play(audio)" :class="{ 'btn--audio-off': !audio.isPlaying }"></label>
-      <div class="game__menu-wrapper">
-        <label @click="restartClicked" class="game__menu-item">Restart</label>
-        <label @click="quitClicked" class="game__menu-item">Quit</label>
+    <section id="game" class="game">
+      <div class="game__menu">
+        <label
+          class="btn"
+          @click.prevent="audio.isPlaying ? pause(audio) : play(audio)"
+          :class="{ 'btn--audio-off': !audio.isPlaying }"
+        ></label>
+        <div class="game__menu-wrapper">
+          <label @click="restartClicked" class="game__menu-item">Restart</label>
+          <label @click="quitClicked" class="game__menu-item">Quit</label>
+        </div>
       </div>
-    </div>
-    <div class="game__wrapper" id="mine-sweeper">
-      <Score :key="restartScore" :found-mines="this.foundMines" :next="this.nextPlayerTrigger" @playerTurn="modalTrigger"></Score>
-      <Board :key="restartGame" @next="togglePlayer" @found="countMines" :found-mines="this.foundMines" :activePlayerTag="this.activePlayerTag"></Board>
-    </div>
-  </section>
-  <Next-player-modal v-if="showModal" :activePlayer="this.activePlayer"></Next-player-modal>
-  <Winner-modal v-if="whoWon" :winner="whoWon" @playAgain="playAgain" @quit="quitGame" @weHaveWinner="weHaveWinner"></Winner-modal>
-  <Restart-modal v-if="restartModal" @playAgain="playAgain" @resume="resumeClicked"></Restart-modal>
-  <Quit-modal v-if="quitModal" @quit="quitGame" @resume="resumeClicked"></Quit-modal>
+      <div class="game__wrapper" id="mine-sweeper">
+        <Score
+          :key="restartScore"
+          :found-mines="this.foundMines"
+          :next="this.nextPlayerTrigger"
+          @playerTurn="modalTrigger"
+        ></Score>
+        <Board
+          :key="restartGame"
+          @next="togglePlayer"
+          @found="countMines"
+          :found-mines="this.foundMines"
+          :activePlayerTag="this.activePlayerTag"
+        ></Board>
+      </div>
+    </section>
+    <Next-player-modal v-if="showModal" :activePlayer="this.activePlayer"></Next-player-modal>
+    <Winner-modal
+      v-if="whoWon"
+      :winner="whoWon"
+      @playAgain="playAgain"
+      @quit="quitGame"
+      @weHaveWinner="weHaveWinner"
+    ></Winner-modal>
+    <Restart-modal v-if="restartModal" @playAgain="playAgain" @resume="resumeClicked"></Restart-modal>
+    <Quit-modal v-if="quitModal" @quit="quitGame" @resume="resumeClicked"></Quit-modal>
   </div>
-
-
 </template>
 
 <script>
@@ -46,15 +64,15 @@ export default {
     return {
       foundMines: 0,
       nextPlayerTrigger: false,
-      activePlayer: '',
-      activePlayerTag: '',
+      activePlayer: "",
+      activePlayerTag: "",
       showModal: false,
       restartGame: 0,
       restartScore: 1,
       restartModal: false,
       quitModal: false,
       audio: {
-        id: 'background',
+        id: "background",
         file: new Audio(require("../audio/background.mp3")),
         isPlaying: false,
         maxVol: 0.6,
@@ -63,17 +81,17 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(['whoIsPlaying', 'reset']),
-    quitGame(){
+    ...mapMutations(["whoIsPlaying", "reset"]),
+    quitGame() {
       this.$emit("quitGame");
     },
     playAgain() {
-      this.restartScore +=1;
-      this.reset()
+      this.restartScore += 1;
+      this.reset();
       this.foundMines = 0;
       this.restartModal = false;
       this.riseVolume(this.audio);
-      return this.restartGame +=1;
+      return (this.restartGame += 1);
     },
     countMines(clicks) {
       if (clicks === 1) {
@@ -86,33 +104,32 @@ export default {
     },
     modalTrigger(player) {
       this.showModal = true;
-      setTimeout(() => this.showModal = false, 800);
+      setTimeout(() => (this.showModal = false), 800);
 
-      if(player === 'player1'){
+      if (player === "player1") {
         this.activePlayer = this.p1;
-        this.whoIsPlaying('player1')
+        this.whoIsPlaying("player1");
+        // Envía el jugador activo a la tienda
+      } else if (player === "player2") {
+        this.activePlayer = this.p2;
+        this.whoIsPlaying("player2");
         // Envía el jugador activo a la tienda
       }
-      else if(player === 'player2'){
-        this.activePlayer = this.p2;
-        this.whoIsPlaying('player2')
-       // Envía el jugador activo a la tienda
-      }
     },
-    restartClicked(){
+    restartClicked() {
       this.restartModal = true;
       this.lowerVolume(this.audio);
     },
-    quitClicked(){
+    quitClicked() {
       this.quitModal = true;
       this.lowerVolume(this.audio);
     },
-    resumeClicked(){
+    resumeClicked() {
       this.restartModal = false;
       this.quitModal = false;
       this.riseVolume(this.audio);
     },
-    weHaveWinner(){
+    weHaveWinner() {
       this.lowerVolume(this.audio);
     },
     play(audio) {
@@ -125,20 +142,20 @@ export default {
       audio.isPlaying = false;
       audio.file.pause();
     },
-    lowerVolume(audio){
+    lowerVolume(audio) {
       audio.file.volume = audio.minVol;
     },
-    riseVolume(audio){
+    riseVolume(audio) {
       audio.file.volume = audio.maxVol;
     }
   },
   computed: {
     ...mapState(["p1", "p2", "whoWon"])
   },
-  created(){
+  created() {
     this.play(this.audio);
   },
-  destroyed(){
+  destroyed() {
     this.pause(this.audio);
   }
 };
@@ -208,10 +225,10 @@ export default {
   height: 50px;
   transition: all 0.3s ease-in;
   background-color: transparent;
-  background: url("../assets/audio-on.svg")
+  background: url("../assets/audio-on.svg");
 }
 
-.btn--audio-off{
-  background: url("../assets/audio-off.svg")
+.btn--audio-off {
+  background: url("../assets/audio-off.svg");
 }
 </style>

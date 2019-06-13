@@ -34,7 +34,16 @@ export default {
       calcY: 0,
       calcX: 0,
       cellNum: 254,
-      cells: [{ x: 0, y: 0, isMined: false, surroundingMines: 0, clicks: 0, mineColor: '' }],
+      cells: [
+        {
+          x: 0,
+          y: 0,
+          isMined: false,
+          surroundingMines: 0,
+          clicks: 0,
+          mineColor: ""
+        }
+      ],
       selectedCell: null,
       mineQty: 51,
       rdmArr: [],
@@ -42,7 +51,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(['checkClicks']),
+    ...mapMutations(["checkClicks"]),
     initBoard() {
       for (let i = 0; i <= this.cellNum; i++) {
         this.calcX++;
@@ -54,7 +63,7 @@ export default {
             isMined: false,
             surroundingMines: 0,
             clicks: 0,
-            mineColor: ''
+            mineColor: ""
           });
         }
         if (this.calcX == 15 && this.calcY <= 14) {
@@ -66,7 +75,7 @@ export default {
             isMined: false,
             surroundingMines: 0,
             clicks: 0,
-            mineColor: ''
+            mineColor: ""
           });
         }
       }
@@ -139,38 +148,35 @@ export default {
       });
     },
     rdmMine(arr) {
-      
-      let searchForArr = (arr, position) =>{
-          let i, j, current;
-          for(i = 0; i < arr.length; ++i){
-            if(position.length === arr[i].length){
-              current = arr[i];
-              for(j = 0; position.length && position[j] === current[j]; ++j){
-                if(j === position.length)
-                return i;
-              }
+      let searchForArr = (arr, position) => {
+        let i, j, current;
+        for (i = 0; i < arr.length; ++i) {
+          if (position.length === arr[i].length) {
+            current = arr[i];
+            for (j = 0; position.length && position[j] === current[j]; ++j) {
+              if (j === position.length) return i;
             }
           }
-          return -1;
         }
+        return -1;
+      };
 
       let reAssign = (e, index) => {
         let rdm = this.cells[Math.floor(Math.random() * this.cellNum)];
         let position = [rdm.x, rdm.y];
-        arr.splice(index, 1, position) 
-      }
+        arr.splice(index, 1, position);
+      };
 
       for (let i = 0; i < this.mineQty; i++) {
-      
         let rdm = this.cells[Math.floor(Math.random() * this.cellNum)];
         let position = [rdm.x, rdm.y];
         arr.push(position);
       }
 
-      arr.forEach((e,index) =>{
+      arr.forEach((e, index) => {
         let dupArr = searchForArr(arr, e);
-        if(dupArr !== index){
-          reAssign(e, index)
+        if (dupArr !== index) {
+          reAssign(e, index);
         }
       });
     },
@@ -271,32 +277,30 @@ export default {
 
       if (this.cells[index].isMined) {
         this.$emit("found", this.cells[index].clicks);
-        this.playSound(require('../audio/underwater.wav'), 1)
-      }
-      else{
-        this.playSound(require('../audio/bubble.wav'), 0.8)
+        this.playSound(require("../audio/underwater.wav"), 1);
+      } else {
+        this.playSound(require("../audio/bubble.wav"), 0.8);
       }
 
       this.checkClicks(this.cells[index].clicks);
 
       //Revisa qué jugador está activo para asignarle el color de la mina a cell.mineColor, y pasa como prop para la celda.
-      if(this.activePlayer === 'player1'){
-        this.cells[index].mineColor = require('../assets/red-mine.svg');
-      }
-      else if(this.activePlayer === 'player2'){
-        this.cells[index].mineColor = require('../assets/blue-mine.svg');
+      if (this.activePlayer === "player1") {
+        this.cells[index].mineColor = require("../assets/red-mine.svg");
+      } else if (this.activePlayer === "player2") {
+        this.cells[index].mineColor = require("../assets/blue-mine.svg");
       }
     },
-    playSound (sound, volume) {
-      if(sound) {
+    playSound(sound, volume) {
+      if (sound) {
         var audio = new Audio(sound);
-        audio.volume = volume
+        audio.volume = volume;
         audio.play();
       }
     }
   },
   computed: {
-    ...mapState(['activePlayer'])
+    ...mapState(["activePlayer"])
   },
   beforeMount() {
     this.initBoard();

@@ -18,7 +18,7 @@
 <script>
 import TotalCount from "@/components/TotalCount.vue";
 import Player from "@/components/Player.vue";
-import {mapState, mapMutations} from 'vuex'
+import { mapState, mapMutations } from "vuex";
 
 export default {
   name: "Score",
@@ -36,38 +36,35 @@ export default {
       pendingMines: 51,
       players: [
         {
-          name: '',
+          name: "",
           isActive: true,
           background: "firstPlayer",
           mineCount: 0,
-          mineColor: ''
+          mineColor: ""
         },
         {
-          name: '',
+          name: "",
           isActive: false,
           background: "secondPlayer",
           mineCount: 0,
-          mineColor: ''
+          mineColor: ""
         }
       ]
     };
   },
   computed: {
-    ...mapState(['p1', 'p2', 'lastCellClicks']),
+    ...mapState(["p1", "p2", "lastCellClicks"]),
     playerToggle() {
-      if(this.lastCellClicks <= 1){
+      if (this.lastCellClicks <= 1) {
         this.players[0].isActive = this.next;
         this.players[1].isActive = !this.next;
 
-        if(this.players[0].isActive && !this.players[1].isActive){
-          this.$emit('playerTurn', 'player1');
+        if (this.players[0].isActive && !this.players[1].isActive) {
+          this.$emit("playerTurn", "player1");
+        } else if (this.players[1].isActive && !this.players[0].isActive) {
+          this.$emit("playerTurn", "player2");
         }
-        else if(this.players[1].isActive && !this.players[0].isActive){
-          this.$emit('playerTurn', 'player2');
-        }
-        
       }
-      
     },
     checkPendingMines() {
       return this.pendingMines - this.foundMines;

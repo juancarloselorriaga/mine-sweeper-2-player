@@ -2,9 +2,9 @@
   <div id="app">
     <div id="nav">
       <div class="game__menu">
-      <div class="head__logo">
-        <img class="head__logo-img" src="@/assets/Logo2.svg" alt="mine-sweeper-logo">
-      </div>
+        <div class="head__logo">
+          <img class="head__logo-img" src="@/assets/Logo2.svg" alt="mine-sweeper-logo">
+        </div>
       </div>
       <div class="nav__item-wrapper">
         <router-link class="link" to="/">Play</router-link>|
@@ -13,7 +13,9 @@
       </div>
       <hr>
     </div>
-    <router-view/>
+    <transition name="fade" mode="out-in">
+      <router-view/>
+    </transition>
   </div>
 </template>
 
@@ -45,10 +47,10 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.3);
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.3);
 }
 
-.link{
+.link {
   font-weight: bold;
   color: #24305e;
   text-decoration: none;
@@ -56,13 +58,13 @@ html {
   font-size: 1.9rem;
 }
 
-.link.router-link-exact-active{
+.link.router-link-exact-active {
   color: #f76c6c;
   text-decoration: underline;
 }
 
 .nav__item-wrapper {
-  display:inline-block;
+  display: inline-block;
 }
 
 .game__menu {
@@ -77,5 +79,17 @@ html {
 
 .head__logo-img {
   width: 100%;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition-duration: 0.3s;
+  transition-property: opacity;
+  transition-timing-function: ease;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0
 }
 </style>

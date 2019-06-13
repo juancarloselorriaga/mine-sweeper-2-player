@@ -11,8 +11,7 @@
 </template>
 
 <script>
-
-import {mapState, mapMutations} from 'vuex'
+import { mapState, mapMutations } from "vuex";
 
 export default {
   name: "Player",
@@ -44,14 +43,14 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['won']),
+    ...mapMutations(["won"])
   },
   watch: {
     foundMines() {
       if (this.player.isActive) {
         this.player.mineCount++;
-        if(this.player.mineCount === 26){
-          this.won(this.player.name)
+        if (this.player.mineCount === 26) {
+          this.won(this.player.name);
         }
       }
     }
@@ -60,7 +59,6 @@ export default {
 </script>
 
 <style>
-
 @-webkit-keyframes GlowAnimation {
   0% {
     background-position: 2% 0%;

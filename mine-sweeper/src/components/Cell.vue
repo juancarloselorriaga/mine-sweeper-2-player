@@ -18,14 +18,12 @@
     <!-- <div v-if="this.mined && this.clicks > 0" class="mine-wrapper">
       <img class="shapeshifter play" src="@/assets/svg/boom/sprite_60fps.svg">
       <img class="mine" :src="mineImg">
-    </div> -->
+    </div>-->
   </div>
 </template>
 
 <script>
-
 import { mapState, mapMutations } from "vuex";
-
 
 export default {
   name: "Cell",
@@ -54,7 +52,6 @@ export default {
         "color--four": this.surroundingMines === 4,
         "color--five": this.surroundingMines === 5
       };
-    
     }
   },
   methods: {
@@ -197,17 +194,15 @@ export default {
 }
 
 @keyframes float {
-	0% {
-		transform: translatey(0px);
-	}
-	50% {
-
-		transform: translatey(-5px);
+  0% {
+    transform: translatey(0px);
   }
-	100% {
-
-		transform: translatey(0px);
-	}
+  50% {
+    transform: translatey(-5px);
+  }
+  100% {
+    transform: translatey(0px);
+  }
 }
 
 .mine {
@@ -254,13 +249,13 @@ export default {
   font-size: 1.8rem;
 }
 
-.red-mine{
+.red-mine {
   background-image: url("../assets/red-mine.svg");
   background-repeat: no-repeat;
   background-position: center;
 }
 
-.blue-mine{
+.blue-mine {
   background-image: url("../assets/blue-mine.svg");
   background-repeat: no-repeat;
   background-position: center;

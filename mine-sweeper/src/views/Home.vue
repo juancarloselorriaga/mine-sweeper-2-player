@@ -5,7 +5,6 @@
       <PlayStep2 v-if="this.showPlyrs" @startGameBtnClicked="startGameBtnClicked"></PlayStep2>
       <Game v-if="showGame" @quitGame="quitGame"></Game>
     </transition>
-    
   </div>
 </template>
 
@@ -13,7 +12,7 @@
 import Game from "@/components/Game.vue";
 import PlayStep1 from "@/components/PlayStep1.vue";
 import PlayStep2 from "@/components/PlayStep2.vue";
-import {mapState, mapMutations} from 'vuex'
+import { mapState, mapMutations } from "vuex";
 
 export default {
   name: "home",
@@ -23,55 +22,61 @@ export default {
     PlayStep2
   },
   data() {
-    return{
+    return {
       showPlayBtn: true,
       showPlyrs: false,
       showGame: false
-    }
+    };
   },
   methods: {
-    ...mapMutations([ 'assignPlayer1', 'assignPlayer2', 'reset', 'resetPlayers' ]),
-    quitGame(){
+    ...mapMutations([
+      "assignPlayer1",
+      "assignPlayer2",
+      "reset",
+      "resetPlayers"
+    ]),
+    quitGame() {
       this.showPlayBtn = true;
       this.showPlyrs = false;
       this.showGame = false;
       this.reset();
       this.resetPlayers();
-      this.playSound(require('../audio/quit.mp3'))
+      this.playSound(require("../audio/quit.mp3"));
     },
-    playSound (sound) {
-      if(sound) {
+    playSound(sound) {
+      if (sound) {
         var audio = new Audio(sound);
         audio.play();
-    }
+      }
     },
-    playBtnClicked(){
+    playBtnClicked() {
       this.showPlayBtn = false;
       this.showPlyrs = true;
-      this.playSound(require('../audio/button.wav'))
+      this.playSound(require("../audio/button.wav"));
     },
-    startGame(){
-      if(this.gameStatus){
+    startGame() {
+      if (this.gameStatus) {
         this.showPlyrs = false;
         this.showGame = true;
         return this.showGame;
-    }
+      }
     },
-    startGameBtnClicked(){
+    startGameBtnClicked() {
       this.showPlyrs = false;
       this.showGame = true;
-      return this.showGame
+      return this.showGame;
     }
   },
   computed: {
-    ...mapState(['gameStatus'])
-    }
+    ...mapState(["gameStatus"])
+  }
 };
 </script>
 
 <style scoped>
-  .fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
