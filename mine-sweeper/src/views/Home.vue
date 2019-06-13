@@ -69,6 +69,13 @@ export default {
   },
   computed: {
     ...mapState(["gameStatus"])
+  },
+  created(){
+      this.showPlayBtn = true;
+      this.showPlyrs = false;
+      this.showGame = false;
+      this.reset();
+      this.resetPlayers();
   }
 };
 </script>
