@@ -77,11 +77,10 @@ html {
 .game__menu {
   display: inline-block;
   padding: 1rem;
-  margin: 1rem;
 }
 
 .head__logo {
-  width: 90%;
+  width: 95%;
 }
 
 .head__logo-img {
